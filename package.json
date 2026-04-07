@@ -57,7 +57,10 @@
 		"lint:write": "bun biome check --write",
 		"typecheck": "tsc -p tsconfig.build.json --noEmit",
 		"smoke:pack": "node ./scripts/smoke-pack.mjs",
-		"prepare": "node ./scripts/prepare.mjs"
+		"prepare": "node ./scripts/prepare.mjs",
+    "publish:patch": "npm version patch && npm publish",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:major": "npm version major && npm publish"
 	},
 	"dependencies": {
 		"typedswitch": "^1.0.0"
