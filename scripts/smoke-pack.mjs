@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(scriptDir, '..')
-const tempDir = mkdtempSync(path.join(tmpdir(), 'ts-metrics-pack-'))
+const tempDir = mkdtempSync(path.join(tmpdir(), 'metrickit-pack-'))
 
 let tarballPath
 
@@ -28,7 +28,7 @@ try {
 		path.join(tempDir, 'package.json'),
 		JSON.stringify(
 			{
-				name: 'ts-metrics-smoke',
+				name: 'metrickit-smoke',
 				private: true,
 				type: 'module'
 			},
@@ -65,11 +65,11 @@ try {
 	writeFileSync(
 		path.join(tempDir, 'smoke.ts'),
 		`import { z } from 'zod'
-import { BaseFiltersSchema, createMetricsEngine, defineKpiOutput } from 'ts-metrics'
-import { createMetricsRouter } from 'ts-metrics/orpc'
-import { redisCacheAdapter } from 'ts-metrics/cache-redis'
-import { defineMetricsRequest } from 'ts-metrics/frontend'
-import { resolveMetricType } from 'ts-metrics/helpers'
+import { BaseFiltersSchema, createMetricsEngine, defineKpiOutput } from 'metrickit'
+import { createMetricsRouter } from 'metrickit/orpc'
+import { redisCacheAdapter } from 'metrickit/cache-redis'
+import { defineMetricsRequest } from 'metrickit/frontend'
+import { resolveMetricType } from 'metrickit/helpers'
 
 const engine = createMetricsEngine<
   { viewerId: string },
@@ -118,11 +118,11 @@ defineMetricsRequest<typeof registry>({
 
 	writeFileSync(
 		path.join(tempDir, 'smoke.mjs'),
-		`import { BaseFiltersSchema, createMetricsEngine, defineKpiOutput } from 'ts-metrics'
-import { createMetricsRouter } from 'ts-metrics/orpc'
-import { redisCacheAdapter } from 'ts-metrics/cache-redis'
-import { defineMetricsRequest } from 'ts-metrics/frontend'
-import { resolveMetricType } from 'ts-metrics/helpers'
+		`import { BaseFiltersSchema, createMetricsEngine, defineKpiOutput } from 'metrickit'
+import { createMetricsRouter } from 'metrickit/orpc'
+import { redisCacheAdapter } from 'metrickit/cache-redis'
+import { defineMetricsRequest } from 'metrickit/frontend'
+import { resolveMetricType } from 'metrickit/helpers'
 
 const engine = createMetricsEngine()
 const metric = engine.defineKpiMetric({

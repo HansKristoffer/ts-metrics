@@ -1,4 +1,4 @@
-# ts-metrics
+# metrickit
 
 Type-safe metrics, dashboards, and transport primitives for TypeScript apps.
 
@@ -9,23 +9,23 @@ Type-safe metrics, dashboards, and transport primitives for TypeScript apps.
 - Registry-driven execution so one metric list powers runtime lookup and compile-time typing
 - Built-in metric kinds for KPI, time series, distribution, table, leaderboard, and pivot outputs
 - Extensible custom metric kinds through `engine.defineMetric(kind, def)`
-- Pluggable caching through `CacheAdapter` with a Redis adapter at `ts-metrics/cache-redis`
-- ORPC-friendly helpers at `ts-metrics/orpc`
-- Framework-neutral frontend helpers at `ts-metrics/frontend`
+- Pluggable caching through `CacheAdapter` with a Redis adapter at `metrickit/cache-redis`
+- ORPC-friendly helpers at `metrickit/orpc`
+- Framework-neutral frontend helpers at `metrickit/frontend`
 
 ## Install
 
 ```bash
-bun add ts-metrics zod
+bun add metrickit zod
 ```
 
 or
 
 ```bash
-npm install ts-metrics zod
+npm install metrickit zod
 ```
 
-`zod` is a peer dependency so your app and `ts-metrics` share the same Zod version.
+`zod` is a peer dependency so your app and `metrickit` share the same Zod version.
 
 ## Runtime Support
 
@@ -34,11 +34,11 @@ npm install ts-metrics zod
 
 ## Package Entry Points
 
-- `ts-metrics`: engine, registry, schemas, runtime helpers, cache interfaces, and filters
-- `ts-metrics/orpc`: typed router helpers for `runMetrics`, streaming, and catalog discovery
-- `ts-metrics/cache-redis`: Redis cache adapter
-- `ts-metrics/frontend`: typed frontend request, dashboard, stream-state, catalog, and formatting helpers
-- `ts-metrics/helpers`: advanced helper utilities for ClickHouse, Prisma, distributions, timeseries shaping, pivot building, and metric-type helpers
+- `metrickit`: engine, registry, schemas, runtime helpers, cache interfaces, and filters
+- `metrickit/orpc`: typed router helpers for `runMetrics`, streaming, and catalog discovery
+- `metrickit/cache-redis`: Redis cache adapter
+- `metrickit/frontend`: typed frontend request, dashboard, stream-state, catalog, and formatting helpers
+- `metrickit/helpers`: advanced helper utilities for ClickHouse, Prisma, distributions, timeseries shaping, pivot building, and metric-type helpers
 
 ## Supported Public API
 
@@ -48,12 +48,12 @@ The normal supported path is:
 - `engine.define*Metric(...)`
 - `engine.createRegistry(...)`
 - `runMetrics()` or `createMetricsRouter(...)`
-- optional frontend helpers from `ts-metrics/frontend`
+- optional frontend helpers from `metrickit/frontend`
 
 The following are also supported, but are more advanced:
 
-- schemas and filter utilities re-exported from `ts-metrics`
-- `ts-metrics/helpers` for framework/database-specific helper utilities
+- schemas and filter utilities re-exported from `metrickit`
+- `metrickit/helpers` for framework/database-specific helper utilities
 
 Avoid depending on internal source paths or unpublished files inside `dist`.
 
@@ -74,9 +74,9 @@ import {
   createMetricsEngine,
   defineKpiOutput,
   runMetrics,
-} from 'ts-metrics'
-import { createMetricsRouter } from 'ts-metrics/orpc'
-import { redisCacheAdapter } from 'ts-metrics/cache-redis'
+} from 'metrickit'
+import { createMetricsRouter } from 'metrickit/orpc'
+import { redisCacheAdapter } from 'metrickit/cache-redis'
 
 const FunnelOutputSchema = z.object({
   kind: z.literal('funnel'),
@@ -218,8 +218,8 @@ The registry drives:
 
 There are two similarly named output concepts:
 
-- `MetricOutput` from `ts-metrics` is the schema-level union of built-in output shapes
-- `MetricOutputFromDef` from `ts-metrics` gives you the resolved output type for a specific metric definition
+- `MetricOutput` from `metrickit` is the schema-level union of built-in output shapes
+- `MetricOutputFromDef` from `metrickit` gives you the resolved output type for a specific metric definition
 
 Use `MetricOutputFromDef` when you want the output type of a concrete metric definition.
 
@@ -244,10 +244,10 @@ Use `runMetricsStream()` when your consumer wants streamed chunks as metrics res
 
 ## ORPC Integration
 
-`ts-metrics/orpc` exposes typed helpers for the common API surface.
+`metrickit/orpc` exposes typed helpers for the common API surface.
 
 ```ts
-import { createMetricsRouter } from 'ts-metrics/orpc'
+import { createMetricsRouter } from 'metrickit/orpc'
 
 export const metricsRouter = createMetricsRouter({
   registry: metricsRegistry,
@@ -275,7 +275,7 @@ const result = await metricsRouter.runMetrics(
 The engine accepts any `CacheAdapter`. If you already have a Redis-like client, use the built-in adapter:
 
 ```ts
-import { redisCacheAdapter } from 'ts-metrics/cache-redis'
+import { redisCacheAdapter } from 'metrickit/cache-redis'
 
 const engine = createMetricsEngine({
   cache: redisCacheAdapter(redisClient),
@@ -289,7 +289,7 @@ Your Redis client only needs:
 
 ## Frontend Helpers
 
-`ts-metrics/frontend` is intentionally framework-neutral. It gives you typed request builders, stream-state helpers, catalog helpers, and dashboard config utilities that can be wrapped by React, Vue, or another UI layer.
+`metrickit/frontend` is intentionally framework-neutral. It gives you typed request builders, stream-state helpers, catalog helpers, and dashboard config utilities that can be wrapped by React, Vue, or another UI layer.
 
 ```ts
 import {
@@ -300,7 +300,7 @@ import {
   defineMetricsRequest,
   defineWidget,
   getMetricResult,
-} from 'ts-metrics/frontend'
+} from 'metrickit/frontend'
 
 const request = defineMetricsRequest<typeof metricsRegistry>({
   metrics: [
@@ -350,14 +350,14 @@ The frontend package includes helpers for:
 
 ## Advanced Helpers
 
-Advanced utility helpers are grouped under `ts-metrics/helpers` instead of the root package so the primary API stays smaller and easier to learn.
+Advanced utility helpers are grouped under `metrickit/helpers` instead of the root package so the primary API stays smaller and easier to learn.
 
 ```ts
 import {
   buildTimeRangeWhere,
   mapBucketsToPoints,
   resolveMetricType,
-} from 'ts-metrics/helpers'
+} from 'metrickit/helpers'
 ```
 
 ## Notes
@@ -366,7 +366,7 @@ import {
 - `requestKey` lets you alias a metric result key while preserving type safety.
 - `runMetrics()` and `runMetricsStream()` validate requests against the registry before executing resolvers.
 - Most consumers only need the engine, registry, runtime helpers, and optional ORPC/frontend entry points.
-- `ts-metrics/helpers` is the place for more specialized utilities that are not part of the minimal happy path.
+- `metrickit/helpers` is the place for more specialized utilities that are not part of the minimal happy path.
 
 ## Local Development
 

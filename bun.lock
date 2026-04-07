@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "ts-metrics",
+      "name": "metrickit",
       "dependencies": {
         "typedswitch": "^1.0.0",
       },

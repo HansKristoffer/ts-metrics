@@ -121,7 +121,7 @@ describe('createMetricsEngine', () => {
 		expect(result.errors['users.active']).toBeDefined()
 	})
 
-	test('exposes typed ORPC procedures from ts-metrics/orpc', async () => {
+	test('exposes typed ORPC procedures from metrickit/orpc', async () => {
 		const EngineFiltersSchema = BaseFiltersSchema.extend({
 			country: z.string().optional()
 		})

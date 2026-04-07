@@ -13,9 +13,9 @@ and this project follows a pragmatic `0.x` release policy:
 
 ### Added
 
-- Initial release of the single-package `ts-metrics` library
+- Initial release of the single-package `metrickit` library
 - Core metrics engine, registry, runtime execution, and cache interfaces
-- ORPC helpers via `ts-metrics/orpc`
-- Redis cache adapter via `ts-metrics/cache-redis`
-- Framework-neutral frontend helpers via `ts-metrics/frontend`
-- Advanced helper utilities grouped under `ts-metrics/helpers`
+- ORPC helpers via `metrickit/orpc`
+- Redis cache adapter via `metrickit/cache-redis`
+- Framework-neutral frontend helpers via `metrickit/frontend`
+- Advanced helper utilities grouped under `metrickit/helpers`
