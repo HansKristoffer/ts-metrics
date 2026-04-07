@@ -1,0 +1,76 @@
+{
+	"name": "ts-metrics",
+	"version": "0.1.0",
+	"description": "Type-safe metrics and dashboard primitives for TypeScript",
+	"type": "module",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/HansKristoffer/ts-metrics.git"
+	},
+	"homepage": "https://github.com/HansKristoffer/ts-metrics#readme",
+	"bugs": {
+		"url": "https://github.com/HansKristoffer/ts-metrics/issues"
+	},
+	"author": "Kristoffer Hansen",
+	"keywords": ["typescript", "metrics", "dashboard", "analytics", "kpi"],
+	"engines": {
+		"node": ">=18.0.0",
+		"bun": ">=1.0.0"
+	},
+	"files": ["dist", "README.md", "LICENSE", "CHANGELOG.md"],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./orpc": {
+			"types": "./dist/orpc.d.ts",
+			"import": "./dist/orpc.js",
+			"default": "./dist/orpc.js"
+		},
+		"./cache-redis": {
+			"types": "./dist/cache-redis.d.ts",
+			"import": "./dist/cache-redis.js",
+			"default": "./dist/cache-redis.js"
+		},
+		"./frontend": {
+			"types": "./dist/frontend.d.ts",
+			"import": "./dist/frontend.js",
+			"default": "./dist/frontend.js"
+		},
+		"./helpers": {
+			"types": "./dist/helpers.d.ts",
+			"import": "./dist/helpers.js",
+			"default": "./dist/helpers.js"
+		}
+	},
+	"scripts": {
+		"clean": "rm -rf ./dist",
+		"build": "bun run clean && bun run build:js && bun run build:types",
+		"build:js": "bun build ./src/index.ts ./src/orpc.ts ./src/cache-redis.ts ./src/frontend.ts ./src/helpers.ts --outdir ./dist --target node --packages external",
+		"build:types": "tsc -p tsconfig.build.json",
+		"prepack": "bun run build",
+		"test": "bun test",
+		"lint": "bun biome check",
+		"lint:write": "bun biome check --write",
+		"typecheck": "tsc -p tsconfig.build.json --noEmit",
+		"smoke:pack": "node ./scripts/smoke-pack.mjs",
+		"prepare": "node ./scripts/prepare.mjs"
+	},
+	"dependencies": {
+		"typedswitch": "^1.0.0"
+	},
+	"peerDependencies": {
+		"zod": "^4.3.6"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.6",
+		"@types/bun": "latest",
+		"@typescript/native-preview": "^7.0.0-dev.20260306.1",
+		"husky": "^9.1.7",
+		"typescript": "^5.7.0",
+		"zod": "^4.3.6"
+	}
+}
