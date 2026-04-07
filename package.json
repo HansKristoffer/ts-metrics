@@ -1,6 +1,6 @@
 {
 	"name": "metrickit",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Type-safe metrics and dashboard primitives for TypeScript",
 	"type": "module",
 	"license": "MIT",
