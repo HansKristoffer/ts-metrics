@@ -1,6 +1,6 @@
 {
 	"name": "ts-metrics",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Type-safe metrics and dashboard primitives for TypeScript",
 	"type": "module",
 	"license": "MIT",
@@ -13,12 +13,23 @@
 		"url": "https://github.com/HansKristoffer/ts-metrics/issues"
 	},
 	"author": "Kristoffer Hansen",
-	"keywords": ["typescript", "metrics", "dashboard", "analytics", "kpi"],
+	"keywords": [
+		"typescript",
+		"metrics",
+		"dashboard",
+		"analytics",
+		"kpi"
+	],
 	"engines": {
 		"node": ">=18.0.0",
 		"bun": ">=1.0.0"
 	},
-	"files": ["dist", "README.md", "LICENSE", "CHANGELOG.md"],
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE",
+		"CHANGELOG.md"
+	],
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -58,9 +69,9 @@
 		"typecheck": "tsc -p tsconfig.build.json --noEmit",
 		"smoke:pack": "node ./scripts/smoke-pack.mjs",
 		"prepare": "node ./scripts/prepare.mjs",
-    "publish:patch": "npm version patch && npm publish",
-    "publish:minor": "npm version minor && npm publish",
-    "publish:major": "npm version major && npm publish"
+		"publish:patch": "npm version patch && npm publish",
+		"publish:minor": "npm version minor && npm publish",
+		"publish:major": "npm version major && npm publish"
 	},
 	"dependencies": {
 		"typedswitch": "^1.0.0"
